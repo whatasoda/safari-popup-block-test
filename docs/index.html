@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    const container = document.querySelector('#container');
+    [
+      { features: undefined, timeout: 100 },
+      { features: undefined, timeout: 500 },
+      { features: undefined, timeout: 750 },
+      { features: undefined, timeout: 800 },
+      { features: undefined, timeout: 900 },
+      { features: undefined, timeout: 998 },
+      { features: undefined, timeout: 999 },
+      { features: undefined, timeout: 1000 },
+      { features: 'noreferrer', timeout: 100 },
+      { features: 'noreferrer', timeout: 500 },
+      { features: 'noreferrer', timeout: 750 },
+      { features: 'noreferrer', timeout: 1000 },
+      { features: 'noopener', timeout: 100 },
+      { features: 'noopener', timeout: 500 },
+      { features: 'noopener', timeout: 750 },
+      { features: 'noopener', timeout: 1000 },
+      { features: 'noreferrer,noopener', timeout: 100 },
+      { features: 'noreferrer,noopener', timeout: 500 },
+      { features: 'noreferrer,noopener', timeout: 750 },
+      { features: 'noreferrer,noopener', timeout: 1000 },
+    ].forEach(({ features, timeout }) => {
+      const href = 'https://www.google.com/';
+      const anchor = Object.assign(document.createElement('a'), {
+        href,
+        style: 'display: block;margin-bottom: 4px;',
+        innerHTML: `${features || 'none'} - ${timeout}`,
+      });
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        setTimeout(() => {
+          window.open(href, '_blank', features);
+        }, timeout);
+      });
+      container.appendChild(anchor);
+    });
+  </script>
+</body>
+</html>
